@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Saista | Linguistic & Data Specialist</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#f0f7ff',
+              100: '#e0effe',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              400: '#60a5fa',
+              purple: '#8b5cf6',
+              cyan: '#06b6d4',
+              emerald: '#10b981',
+            }
+          },
+          animation: {
+            'float': 'float 6s ease-in-out infinite',
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'spin-slow': 'spin 12s linear infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-15px)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.6);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #3b82f6;
+      border-radius: 4px;
+    }
+    
+    /* Glassmorphism Classes */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    .dark .glass-card {
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .glass-nav {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(229, 231, 235, 0.8);
+    }
+    .dark .glass-nav {
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    /* Scroll Animation Reveal Classes */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Glowing Text & Borders */
+    .text-gradient {
+      background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #06b6d4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Canvas styling */
+    #bg-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+  </style>
+</head>
+
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-sans transition-colors duration-300 antialiased relative overflow-x-hidden">
+
+  <!-- Interactive Canvas Background -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- Notification Toast -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 ease-in-out bg-slate-900 text-white px-5 py-3 rounded-xl shadow-2xl flex items-center space-x-3 border border-slate-700">
+    <i class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>
+    <span id="toast-message" class="text-sm font-medium">Copied to clipboard!</span>
+  </div>
+
+  <!-- HEADER / NAVIGATION -->
+  <header class="fixed top-0 left-0 right-0 z-40 glass-nav transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="#hero" class="flex items-center space-x-3 group">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-purple-600 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-blue-500/30 group-hover:scale-105 transition-transform duration-300">
+          S
+        </div>
+        <div>
+          <span class="text-xl font-extrabold tracking-wider text-slate-900 dark:text-white block leading-none">SAISTA</span>
+          <span class="text-[10px] font-mono tracking-widest text-blue-600 dark:text-blue-400 uppercase">AI Specialist</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="hidden md:flex items-center space-x-1 lg:space-x-2 text-sm font-semibold">
+        <a href="#about" class="px-4 py-2 rounded-lg text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-all">About</a>
+        <a href="#experience" class="px-4 py-2 rounded-lg text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-all">Experience</a>
+        <a href="#skills" class="px-4 py-2 rounded-lg text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-all">Skills</a>
+        <a href="#languages" class="px-4 py-2 rounded-lg text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-all">Languages</a>
+        <a href="#education" class="px-4 py-2 rounded-lg text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-all">Education</a>
+        <a href="#contact" class="px-4 py-2 rounded-lg text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-all">Contact</a>
+      </nav>
+
+      <!-- Actions (Theme Switcher + Mobile Toggle) -->
+      <div class="flex items-center space-x-3">
+        <!-- Theme Toggle Button -->
+        <button id="theme-toggle" aria-label="Toggle Theme" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:scale-105 transition-all">
+          <i id="theme-toggle-dark-icon" class="fa-solid fa-moon text-lg hidden"></i>
+          <i id="theme-toggle-light-icon" class="fa-solid fa-sun text-lg"></i>
+        </button>
+
+        <!-- CTA Mobile/Desktop -->
+        <a href="mailto:arasaifi786@gmail.com" class="hidden sm:inline-flex items-center space-x-2 px-4 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium text-sm shadow-md shadow-blue-500/20 hover:scale-[1.02] transition-all">
+          <i class="fa-regular fa-paper-plane"></i>
+          <span>Hire Me</span>
+        </a>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn" aria-label="Open Navigation Menu" class="md:hidden p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200">
+          <i class="fa-solid fa-bars text-xl"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="hidden md:hidden glass-card border-b border-slate-200 dark:border-slate-800 px-4 pt-2 pb-6 space-y-2">
+      <a href="#about" class="mobile-link block px-4 py-3 rounded-lg text-slate-700 dark:text-slate-200 font-medium hover:bg-slate-100 dark:hover:bg-slate-800">About</a>
+      <a href="#experience" class="mobile-link block px-4 py-3 rounded-lg text-slate-700 dark:text-slate-200 font-medium hover:bg-slate-100 dark:hover:bg-slate-800">Experience</a>
+      <a href="#skills" class="mobile-link block px-4 py-3 rounded-lg text-slate-700 dark:text-slate-200 font-medium hover:bg-slate-100 dark:hover:bg-slate-800">Skills</a>
+      <a href="#languages" class="mobile-link block px-4 py-3 rounded-lg text-slate-700 dark:text-slate-200 font-medium hover:bg-slate-100 dark:hover:bg-slate-800">Languages</a>
+      <a href="#education" class="mobile-link block px-4 py-3 rounded-lg text-slate-700 dark:text-slate-200 font-medium hover:bg-slate-100 dark:hover:bg-slate-800">Education</a>
+      <a href="#contact" class="mobile-link block px-4 py-3 rounded-lg text-slate-700 dark:text-slate-200 font-medium hover:bg-slate-100 dark:hover:bg-slate-800">Contact</a>
+    </div>
+  </header>
+
+  <main class="relative z-10 pt-20">
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="min-h-[calc(100vh-80px)] flex items-center justify-center relative px-4 sm:px-6 lg:px-8 py-16">
+      <div class="max-w-5xl mx-auto text-center space-y-8 reveal active">
+        
+        <!-- Status Badge -->
+        <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full glass-card text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300 border border-blue-500/30 shadow-sm">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
+          <span>Available for High-Impact AI & Linguistic Projects</span>
+        </div>
+
+        <!-- Main Title & Headline -->
+        <div class="space-y-4">
+          <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight">
+            Hi, I'm <span class="text-gradient">SAISTA</span>
+          </h1>
+          <p class="text-xl sm:text-2xl md:text-3xl font-semibold text-slate-700 dark:text-slate-200 tracking-wide">
+            LINGUISTIC & DATA SPECIALIST
+          </p>
+          <p class="max-w-2xl mx-auto text-base sm:text-lg text-slate-600 dark:text-slate-400 leading-relaxed pt-2">
+            Pioneering human-in-the-loop AI training through <span class="text-blue-600 dark:text-blue-400 font-semibold">RLHF</span>, multi-turn prompt crafting, speech synthesis evaluation, and deep linguistic validation across major tech platforms.
+          </p>
+        </div>
+
+        <!-- Location Badge -->
+        <div class="flex items-center justify-center space-x-4 text-sm font-medium text-slate-500 dark:text-slate-400">
+          <span class="flex items-center space-x-1.5"><i class="fa-solid fa-location-dot text-red-500"></i><span>Delhi, India</span></span>
+          <span>•</span>
+          <span class="flex items-center space-x-1.5"><i class="fa-solid fa-language text-indigo-500"></i><span>6 Languages</span></span>
+          <span>•</span>
+          <span class="flex items-center space-x-1.5"><i class="fa-solid fa-brain text-purple-500"></i><span>LLM Tuning Specialist</span></span>
+        </div>
+
+        <!-- Hero Buttons -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+          <a href="#experience" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold text-base shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:-translate-y-0.5 transition-all flex items-center justify-center space-x-2">
+            <span>Explore Experience</span>
+            <i class="fa-solid fa-arrow-down text-sm"></i>
+          </a>
+          <button onclick="copyToClipboard('arasaifi786@gmail.com', 'Email copied to clipboard!')" class="w-full sm:w-auto px-8 py-4 rounded-xl glass-card hover:bg-slate-200/50 dark:hover:bg-slate-800/80 text-slate-800 dark:text-slate-200 font-semibold text-base transition-all border border-slate-300 dark:border-slate-700 flex items-center justify-center space-x-2">
+            <i class="fa-regular fa-copy text-blue-500"></i>
+            <span>arasaifi786@gmail.com</span>
+          </button>
+        </div>
+
+        <!-- Platform Cloud Badges -->
+        <div class="pt-10">
+          <p class="text-xs font-mono uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-4">Trusted Contributor Across Top AI Platforms</p>
+          <div class="flex flex-wrap items-center justify-center gap-3 max-w-3xl mx-auto">
+            <span class="px-3.5 py-1.5 rounded-lg glass-card text-xs font-medium text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800">Data Annotation.tech</span>
+            <span class="px-3.5 py-1.5 rounded-lg glass-card text-xs font-medium text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800">Outlier AI (Aether)</span>
+            <span class="px-3.5 py-1.5 rounded-lg glass-card text-xs font-medium text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800">CrowdGen (Appen)</span>
+            <span class="px-3.5 py-1.5 rounded-lg glass-card text-xs font-medium text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800">Handshake AI</span>
+            <span class="px-3.5 py-1.5 rounded-lg glass-card text-xs font-medium text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800">Babel Audio</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PROFESSIONAL SUMMARY SECTION -->
+    <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 relative">
+      <div class="max-w-6xl mx-auto">
+        <div class="glass-card rounded-3xl p-8 sm:p-12 shadow-xl relative overflow-hidden reveal">
+          <!-- Background accent glow -->
+          <div class="absolute -right-20 -bottom-20 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
+          
+          <div class="grid md:grid-cols-12 gap-8 items-center">
+            
+            <div class="md:col-span-8 space-y-6">
+              <div class="flex items-center space-x-3">
+                <span class="w-8 h-1 bg-blue-600 rounded-full"></span>
+                <span class="text-sm font-mono text-blue-600 dark:text-blue-400 font-semibold tracking-wider uppercase">Professional Overview</span>
+              </div>
+              
+              <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">
+                Architecting Precision in Generative AI & Speech Data
+              </h2>
+              
+              <p class="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed">
+                Results-driven <strong class="text-slate-900 dark:text-white font-semibold">Linguistic and Data Specialist</strong> with extensive hands-on experience across top-tier AI training and data annotation platforms, including Data Annotation.tech, Outlier AI, CrowdGen by Appen, Handshake AI, and Babel Audio.
+              </p>
+              
+              <p class="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed">
+                Proven expertise in fine-tuning Large Language Models (LLMs) through advanced RLHF workflows, multi-turn adversarial prompt engineering, speech evaluation, and complex dataset auditing.
+              </p>
+
+              <!-- Quick Highlights Grid -->
+              <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-4">
+                <div class="p-4 rounded-2xl bg-blue-50 dark:bg-slate-900/60 border border-blue-100 dark:border-slate-800">
+                  <div class="text-2xl font-bold text-blue-600 dark:text-blue-400">RLHF</div>
+                  <div class="text-xs text-slate-500 dark:text-slate-400 mt-1">Framework Tuning</div>
+                </div>
+                <div class="p-4 rounded-2xl bg-indigo-50 dark:bg-slate-900/60 border border-indigo-100 dark:border-slate-800">
+                  <div class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">Multi-Turn</div>
+                  <div class="text-xs text-slate-500 dark:text-slate-400 mt-1">Prompt Crafting</div>
+                </div>
+                <div class="p-4 rounded-2xl bg-purple-50 dark:bg-slate-900/60 border border-purple-100 dark:border-slate-800">
+                  <div class="text-2xl font-bold text-purple-600 dark:text-purple-400">ASR / TTS</div>
+                  <div class="text-xs text-slate-500 dark:text-slate-400 mt-1">Audio Evaluation</div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Profile Summary Side Info Card -->
+            <div class="md:col-span-4 bg-slate-100 dark:bg-slate-900/80 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 space-y-5">
+              <h3 class="text-lg font-bold text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-800 pb-3">Quick Dossier</h3>
+              
+              <div class="space-y-3.5 text-sm">
+                <div class="flex justify-between items-center">
+                  <span class="text-slate-500 dark:text-slate-400">Primary Role:</span>
+                  <span class="font-semibold text-slate-800 dark:text-slate-200">AI Data Specialist</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-slate-500 dark:text-slate-400">Location:</span>
+                  <span class="font-semibold text-slate-800 dark:text-slate-200">Delhi, India</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-slate-500 dark:text-slate-400">Education:</span>
+                  <span class="font-semibold text-slate-800 dark:text-slate-200">B.Com (DU 2024–27)</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-slate-500 dark:text-slate-400">Languages:</span>
+                  <span class="font-semibold text-slate-800 dark:text-slate-200">6 Dialects & Langs</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-slate-500 dark:text-slate-400">Specialty:</span>
+                  <span class="font-semibold text-blue-600 dark:text-blue-400">Hindi/Urdu LLM Eval</span>
+                </div>
+              </div>
+
+              <button onclick="copyToClipboard('arasaifi786@gmail.com', 'Email copied!')" class="w-full py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs tracking-wider uppercase transition-colors flex items-center justify-center space-x-2">
+                <i class="fa-regular fa-envelope"></i>
+                <span>Get In Touch</span>
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROFESSIONAL EXPERIENCE SECTION -->
+    <section id="experience" class="py-20 px-4 sm:px-6 lg:px-8 relative">
+      <div class="max-w-6xl mx-auto space-y-12">
+        
+        <!-- Section Title -->
+        <div class="text-center space-y-3 reveal">
+          <span class="text-sm font-mono text-blue-600 dark:text-blue-400 font-semibold tracking-wider uppercase">Career Progression</span>
+          <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white">Professional Experience</h2>
+          <p class="text-slate-600 dark:text-slate-400 max-w-xl mx-auto text-sm sm:text-base">Impactful contributions to state-of-the-art multilingual LLM and Speech AI models.</p>
+        </div>
+
+        <!-- Experience Timeline -->
+        <div class="relative border-l-2 border-slate-300 dark:border-slate-800 ml-4 md:ml-32 space-y-12">
+          
+          <!-- Experience 1 -->
+          <div class="relative pl-8 md:pl-10 group reveal">
+            <!-- Timeline Icon Node -->
+            <div class="absolute -left-[17px] top-1.5 w-8 h-8 rounded-full bg-blue-600 border-4 border-slate-50 dark:border-slate-950 flex items-center justify-center text-white text-xs group-hover:scale-125 transition-transform duration-300">
+              <i class="fa-solid fa-brain"></i>
+            </div>
+            
+            <div class="glass-card rounded-2xl p-6 sm:p-8 hover:border-blue-500/50 transition-all duration-300 space-y-4">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div>
+                  <h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">AI Specialist & Data Annotation Contractor</h3>
+                  <div class="text-blue-600 dark:text-blue-400 font-medium text-sm">Data Annotation.tech</div>
+                </div>
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-mono font-medium bg-blue-100 dark:bg-blue-950/80 text-blue-700 dark:text-blue-300 w-fit">
+                  June 2026 – Present
+                </span>
+              </div>
+
+              <ul class="space-y-3 text-slate-600 dark:text-slate-300 text-sm sm:text-base">
+                <li class="flex items-start space-x-3">
+                  <i class="fa-solid fa-check text-blue-500 mt-1.5 text-xs"></i>
+                  <span><strong class="text-slate-900 dark:text-slate-100">Hindi Long Prompt Writing:</strong> Crafted sophisticated, multi-turn adversarial prompts in Hindi to challenge LLM logic and surface hallucination trends.</span>
+                </li>
+                <li class="flex items-start space-x-3">
+                  <i class="fa-solid fa-check text-blue-500 mt-1.5 text-xs"></i>
+                  <span><strong class="text-slate-900 dark:text-slate-100">Text Evaluation & LLM Training:</strong> Participated in specialized text evaluation and natural language tasks to train generative models on accurate syntax and reasoning.</span>
+                </li>
+              </ul>
+
+              <div class="flex flex-wrap gap-2 pt-2">
+                <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Hindi NLP</span>
+                <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Adversarial Testing</span>
+                <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Hallucination Auditing</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Experience 2 -->
+          <div class="relative pl-8 md:pl-10 group reveal">
+            <div class="absolute -left-[17px] top-1.5 w-8 h-8 rounded-full bg-indigo-600 border-4 border-slate-50 dark:border-slate-950 flex items-center justify-center text-white text-xs group-hover:scale-125 transition-transform duration-300">
+              <i class="fa-solid fa-microchip"></i>
+            </div>
+            
+            <div class="glass-card rounded-2xl p-6 sm:p-8 hover:border-indigo-500/50 transition-all duration-300 space-y-4">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div>
+                  <h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">AI Specialist – Aether Generalist</h3>
+                  <div class="text-indigo-600 dark:text-indigo-400 font-medium text-sm">Outlier AI</div>
+                </div>
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-mono font-medium bg-indigo-100 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 w-fit">
+                  June 2026 – Present
+                </span>
+              </div>
+
+              <ul class="space-y-3 text-slate-600 dark:text-slate-300 text-sm sm:text-base">
+                <li class="flex items-start space-x-3">
+                  <i class="fa-solid fa-check text-indigo-500 mt-1.5 text-xs"></i>
+                  <span><strong class="text-slate-900 dark:text-slate-100">Omni TTS Elo:</strong> Evaluated and ranked text-to-speech outputs, assessing audio naturalness, linguistic tone, and contextual alignment.</span>
+                </li>
+                <li class="flex items-start space-x-3">
+                  <i class="fa-solid fa-check text-indigo-500 mt-1.5 text-xs"></i>
+                  <span><strong class="text-slate-900 dark:text-slate-100">S2S Live Arena:</strong> Conducted real-time speech-to-speech evaluations, grading conversational flow, latency, and safety constraints.</span>
+                </li>
+                <li class="flex items-start space-x-3">
+                  <i class="fa-solid fa-check text-indigo-500 mt-1.5 text-xs"></i>
+                  <span><strong class="text-slate-900 dark:text-slate-100">General AI Model Grading:</strong> Graded model responses across factual accuracy and localized patterns using strict RLHF guidelines.</span>
+                </li>
+              </ul>
+
+              <div class="flex flex-wrap gap-2 pt-2">
+                <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300">TTS Elo</span>
+                <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Speech-to-Speech</span>
+                <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300">RLHF Guidelines</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Experience 3 -->
+          <div class="relative pl-8 md:pl-10 group reveal">
+            <div class="absolute -left-[17px] top-1.5 w-8 h-8 rounded-full bg-purple-600 border-4 border-slate-50 dark:border-slate-950 flex items-center justify-center text-white text-xs group-hover:scale-125 transition-transform duration-300">
+              <i class="fa-solid fa-wave-square"></i>
+            </div>
+            
+            <div class="glass-card rounded-2xl p-6 sm:p-8 hover:border-purple-500/50 transition-all duration-300 space-y-4">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div>
+                  <h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">Linguistic & Data Specialist</h3>
+                  <div class="text-purple-600 dark:text-purple-400 font-medium text-sm">CrowdGen by Appen</div>
+                </div>
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-mono font-medium bg-purple-100 dark:bg-purple-950/80 text-purple-700 dark:text-purple-300 w-fit">
+                  March 2026 – Present
+                </span>
+              </div>
+
+              <ul class="space-y-3 text-slate-600 dark:text-slate-300 text-sm sm:text-base">
+                <li class="flex items-start space-x-3">
+                  <i class="fa-solid fa-check text-purple-500 mt-1.5 text-xs"></i>
+                  <span><strong class="text-slate-900 dark:text-slate-100">Hindi & Urdu Voice Collection:</strong> Executed high-volume native speech recording assignments to train localized ASR systems.</span>
+                </li>
+                <li class="flex items-start space-x-3">
+                  <i class="fa-solid fa-check text-purple-500 mt-1.5 text-xs"></i>
+                  <span><strong class="text-slate-900 dark:text-slate-100">Origami Image Captioning:</strong> Generated descriptive captions and tags to improve multimodal AI model recognition.</span>
+                </li>
+                <li class="flex items-start space-x-3">
+                  <i class="fa-solid fa-check text-purple-500 mt-1.5 text-xs"></i>
+                  <span><strong class="text-slate-900 dark:text-slate-100">Origo QA Checker:</strong> Audited multi-language datasets and transcriptions to enforce high data fidelity.</span>
+                </li>
+                <li class="flex items-start space-x-3">
+                  <i class="fa-solid fa-check text-purple-500 mt-1.5 text-xs"></i>
+                  <span><strong class="text-slate-900 dark:text-slate-100">India Wake Word Project:</strong> Collected and annotated regional utterances for acoustic activation.</span>
+                </li>
+              </ul>
+
+              <div class="flex flex-wrap gap-2 pt-2">
+                <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300">ASR Training</span>
+                <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Multimodal Tagging</span>
+                <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Dataset Auditing</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Experience 4 -->
+          <div class="relative pl-8 md:pl-10 group reveal">
+            <div class="absolute -left-[17px] top-1.5 w-8 h-8 rounded-full bg-cyan-600 border-4 border-slate-50 dark:border-slate-950 flex items-center justify-center text-white text-xs group-hover:scale-125 transition-transform duration-300">
+              <i class="fa-solid fa-[#06b6d4] fa-headphones"></i>
+            </div>
+            
+            <div class="glass-card rounded-2xl p-6 sm:p-8 hover:border-cyan-500/50 transition-all duration-300 space-y-4">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div>
+                  <h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">External AI & Audio Evaluation Contributor</h3>
+                  <div class="text-cyan-600 dark:text-cyan-400 font-medium text-sm">Handshake AI & Babel Audio</div>
+                </div>
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-mono font-medium bg-cyan-100 dark:bg-cyan-950/80 text-cyan-700 dark:text-cyan-300 w-fit">
+                  June 2026 – Present
+                </span>
+              </div>
+
+              <ul class="space-y-3 text-slate-600 dark:text-slate-300 text-sm sm:text-base">
+                <li class="flex items-start space-x-3">
+                  <i class="fa-solid fa-check text-cyan-500 mt-1.5 text-xs"></i>
+                  <span><strong class="text-slate-900 dark:text-slate-100">Seal Project (Handshake AI):</strong> Performed specialized data validation tasks targeting complex NLP datasets.</span>
+                </li>
+                <li class="flex items-start space-x-3">
+                  <i class="fa-solid fa-check text-cyan-500 mt-1.5 text-xs"></i>
+                  <span><strong class="text-slate-900 dark:text-slate-100">HI Naturalness Eval (Babel Audio):</strong> Evaluated Hindi synthetic speech audio tracks, scoring human-likeness and pronunciation clarity.</span>
+                </li>
+              </ul>
+
+              <div class="flex flex-wrap gap-2 pt-2">
+                <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Data Validation</span>
+                <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Synthetic Speech Scoring</span>
+                <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Phonetics</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CORE SKILLS SECTION WITH FILTERING -->
+    <section id="skills" class="py-20 px-4 sm:px-6 lg:px-8 relative bg-slate-100/50 dark:bg-slate-900/30">
+      <div class="max-w-6xl mx-auto space-y-10">
+        
+        <!-- Section Header -->
+        <div class="text-center space-y-3 reveal">
+          <span class="text-sm font-mono text-blue-600 dark:text-blue-400 font-semibold tracking-wider uppercase">Technical Capabilities</span>
+          <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white">Core Skills Matrix</h2>
+          <p class="text-slate-600 dark:text-slate-400 max-w-xl mx-auto text-sm sm:text-base">Categorized breakdown of expertise across AI pipelines and data methodologies.</p>
+        </div>
+
+        <!-- Filter Controls -->
+        <div class="flex flex-wrap justify-center gap-2 reveal">
+          <button onclick="filterSkills('all')" class="skill-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all bg-blue-600 text-white shadow-md">All Skills</button>
+          <button onclick="filterSkills('llm')" class="skill-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all glass-card text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800">AI Data & LLM</button>
+          <button onclick="filterSkills('linguistic')" class="skill-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all glass-card text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800">Linguistic & Speech AI</button>
+          <button onclick="filterSkills('multimodal')" class="skill-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all glass-card text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800">Multimodal & QA</button>
+          <button onclick="filterSkills('platforms')" class="skill-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all glass-card text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800">Platforms & Tools</button>
+        </div>
+
+        <!-- Skills Grid Container -->
+        <div id="skills-container" class="grid sm:grid-cols-2 lg:grid-cols-2 gap-6 reveal">
+          
+          <!-- Category 1 -->
+          <div class="skill-card glass-card rounded-2xl p-6 space-y-4 border border-slate-200 dark:border-slate-800 hover:shadow-lg transition-all" data-category="llm">
+            <div class="flex items-center space-x-3 text-blue-600 dark:text-blue-400">
+              <div class="w-10 h-10 rounded-xl bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center text-lg">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+              </div>
+              <h3 class="text-xl font-bold text-slate-900 dark:text-white">AI Data & LLM Tuning</h3>
+            </div>
+            <div class="flex flex-wrap gap-2 pt-2">
+              <span class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-900">RLHF Frameworks</span>
+              <span class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-900">LLM Response Evaluation</span>
+              <span class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-900">Multi-Turn Prompt Engineering</span>
+              <span class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-900">Fact-Checking</span>
+              <span class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-900">Hallucination Detection</span>
+              <span class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-900">Safety Alignment</span>
+            </div>
+          </div>
+
+          <!-- Category 2 -->
+          <div class="skill-card glass-card rounded-2xl p-6 space-y-4 border border-slate-200 dark:border-slate-800 hover:shadow-lg transition-all" data-category="linguistic">
+            <div class="flex items-center space-x-3 text-indigo-600 dark:text-indigo-400">
+              <div class="w-10 h-10 rounded-xl bg-indigo-100 dark:bg-indigo-900/50 flex items-center justify-center text-lg">
+                <i class="fa-solid fa-microphone-lines"></i>
+              </div>
+              <h3 class="text-xl font-bold text-slate-900 dark:text-white">Linguistic & Speech AI</h3>
+            </div>
+            <div class="flex flex-wrap gap-2 pt-2">
+              <span class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-900">Translation</span>
+              <span class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-900">Transcription</span>
+              <span class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-900">Naturalness Evaluation</span>
+              <span class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-900">Speech Collection</span>
+              <span class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-900">ASR Training</span>
+              <span class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-900">Wake Word Validation</span>
+              <span class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-900">Phonetic Capturing</span>
+            </div>
+          </div>
+
+          <!-- Category 3 -->
+          <div class="skill-card glass-card rounded-2xl p-6 space-y-4 border border-slate-200 dark:border-slate-800 hover:shadow-lg transition-all" data-category="multimodal">
+            <div class="flex items-center space-x-3 text-purple-600 dark:text-purple-400">
+              <div class="w-10 h-10 rounded-xl bg-purple-100 dark:bg-purple-900/50 flex items-center justify-center text-lg">
+                <i class="fa-solid fa-photo-film"></i>
+              </div>
+              <h3 class="text-xl font-bold text-slate-900 dark:text-white">Multimodal & QA</h3>
+            </div>
+            <div class="flex flex-wrap gap-2 pt-2">
+              <span class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-purple-50 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-900">Image Captioning</span>
+              <span class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-purple-50 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-900">Dataset Tagging</span>
+              <span class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-purple-50 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-900">Systematic Error Analysis</span>
+              <span class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-purple-50 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-900">QA Review</span>
+            </div>
+          </div>
+
+          <!-- Category 4 -->
+          <div class="skill-card glass-card rounded-2xl p-6 space-y-4 border border-slate-200 dark:border-slate-800 hover:shadow-lg transition-all" data-category="platforms">
+            <div class="flex items-center space-x-3 text-cyan-600 dark:text-cyan-400">
+              <div class="w-10 h-10 rounded-xl bg-cyan-100 dark:bg-cyan-900/50 flex items-center justify-center text-lg">
+                <i class="fa-solid fa-cubes"></i>
+              </div>
+              <h3 class="text-xl font-bold text-slate-900 dark:text-white">Platforms & Tools</h3>
+            </div>
+            <div class="flex flex-wrap gap-2 pt-2">
+              <span class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-cyan-50 dark:bg-cyan-950/60 text-cyan-700 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-900">Data Annotation.tech</span>
+              <span class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-cyan-50 dark:bg-cyan-950/60 text-cyan-700 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-900">Outlier AI (Aether)</span>
+              <span class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-cyan-50 dark:bg-cyan-950/60 text-cyan-700 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-900">CrowdGen (Appen)</span>
+              <span class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-cyan-50 dark:bg-cyan-950/60 text-cyan-700 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-900">Handshake AI</span>
+              <span class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-cyan-50 dark:bg-cyan-950/60 text-cyan-700 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-900">Babel Audio</span>
+              <span class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-cyan-50 dark:bg-cyan-950/60 text-cyan-700 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-900">MS Excel / Office</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- LANGUAGES PROFICIENCY SECTION -->
+    <section id="languages" class="py-20 px-4 sm:px-6 lg:px-8 relative">
+      <div class="max-w-6xl mx-auto space-y-12">
+        
+        <div class="text-center space-y-3 reveal">
+          <span class="text-sm font-mono text-blue-600 dark:text-blue-400 font-semibold tracking-wider uppercase">Linguistic Fluency</span>
+          <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white">Languages</h2>
+          <p class="text-slate-600 dark:text-slate-400 max-w-xl mx-auto text-sm sm:text-base">Multilingual capability powering cross-cultural AI localization and speech processing.</p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 reveal">
+          
+          <!-- Hindi -->
+          <div class="glass-card rounded-2xl p-6 space-y-3 hover:scale-[1.02] transition-all border-l-4 border-l-emerald-500">
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-lg text-slate-900 dark:text-white">Hindi</span>
+              <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 font-medium">Native</span>
+            </div>
+            <div class="w-full bg-slate-200 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
+              <div class="bg-emerald-500 h-full rounded-full" style="width: 100%"></div>
+            </div>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Native proficiency in syntax, regional accents, & LLM evaluation</p>
+          </div>
+
+          <!-- Punjabi -->
+          <div class="glass-card rounded-2xl p-6 space-y-3 hover:scale-[1.02] transition-all border-l-4 border-l-emerald-500">
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-lg text-slate-900 dark:text-white">Punjabi</span>
+              <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 font-medium">Native</span>
+            </div>
+            <div class="w-full bg-slate-200 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
+              <div class="bg-emerald-500 h-full rounded-full" style="width: 100%"></div>
+            </div>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Native speaker with comprehensive acoustic understanding</p>
+          </div>
+
+          <!-- Urdu -->
+          <div class="glass-card rounded-2xl p-6 space-y-3 hover:scale-[1.02] transition-all border-l-4 border-l-blue-500">
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-lg text-slate-900 dark:text-white">Urdu</span>
+              <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-blue-100 dark:bg-blue-950 text-blue-600 dark:text-blue-400 font-medium">Professional Working</span>
+            </div>
+            <div class="w-full bg-slate-200 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
+              <div class="bg-blue-500 h-full rounded-full" style="width: 85%"></div>
+            </div>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Voice recording & transcription quality assurance</p>
+          </div>
+
+          <!-- English -->
+          <div class="glass-card rounded-2xl p-6 space-y-3 hover:scale-[1.02] transition-all border-l-4 border-l-blue-500">
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-lg text-slate-900 dark:text-white">English</span>
+              <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-blue-100 dark:bg-blue-950 text-blue-600 dark:text-blue-400 font-medium">Professional Working</span>
+            </div>
+            <div class="w-full bg-slate-200 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
+              <div class="bg-blue-500 h-full rounded-full" style="width: 85%"></div>
+            </div>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Global AI platform operations & prompt documentation</p>
+          </div>
+
+          <!-- Arabic -->
+          <div class="glass-card rounded-2xl p-6 space-y-3 hover:scale-[1.02] transition-all border-l-4 border-l-amber-500">
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-lg text-slate-900 dark:text-white">Arabic</span>
+              <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-amber-100 dark:bg-amber-950 text-amber-600 dark:text-amber-400 font-medium">Limited Working</span>
+            </div>
+            <div class="w-full bg-slate-200 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
+              <div class="bg-amber-500 h-full rounded-full" style="width: 50%"></div>
+            </div>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Phonetic understanding and structured text parsing</p>
+          </div>
+
+          <!-- Korean -->
+          <div class="glass-card rounded-2xl p-6 space-y-3 hover:scale-[1.02] transition-all border-l-4 border-l-purple-500">
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-lg text-slate-900 dark:text-white">Korean</span>
+              <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-purple-100 dark:bg-purple-950 text-purple-600 dark:text-purple-400 font-medium">Conversational</span>
+            </div>
+            <div class="w-full bg-slate-200 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
+              <div class="bg-purple-500 h-full rounded-full" style="width: 60%"></div>
+            </div>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Basic conversational fluency and speech dynamics</p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- EDUCATION & CERTIFICATIONS SECTION -->
+    <section id="education" class="py-20 px-4 sm:px-6 lg:px-8 relative bg-slate-100/50 dark:bg-slate-900/30">
+      <div class="max-w-6xl mx-auto space-y-12">
+        
+        <div class="text-center space-y-3 reveal">
+          <span class="text-sm font-mono text-blue-600 dark:text-blue-400 font-semibold tracking-wider uppercase">Credentials</span>
+          <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white">Education & Certifications</h2>
+          <p class="text-slate-600 dark:text-slate-400 max-w-xl mx-auto text-sm sm:text-base">Academic background and continuous learning in computer applications and AI techniques.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8 reveal">
+          
+          <!-- Academic Education -->
+          <div class="glass-card rounded-2xl p-8 space-y-6">
+            <div class="flex items-center space-x-3 text-blue-600 dark:text-blue-400 border-b border-slate-200 dark:border-slate-800 pb-4">
+              <i class="fa-solid fa-graduation-cap text-2xl"></i>
+              <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Academic Degree</h3>
+            </div>
+
+            <div class="space-y-2">
+              <div class="flex justify-between items-start">
+                <h4 class="text-xl font-bold text-slate-900 dark:text-white">Bachelor of Commerce (B.Com)</h4>
+                <span class="text-xs font-mono px-3 py-1 bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 rounded-full">2024 – 2027</span>
+              </div>
+              <p class="text-slate-600 dark:text-slate-400 font-medium">Delhi University, New Delhi</p>
+              <p class="text-sm text-slate-500 dark:text-slate-400 pt-2">Developing strong analytical, quantitative, and logical reasoning skills foundational to data auditing and structured evaluation.</p>
+            </div>
+          </div>
+
+          <!-- Diplomas & Certifications -->
+          <div class="glass-card rounded-2xl p-8 space-y-6">
+            <div class="flex items-center space-x-3 text-indigo-600 dark:text-indigo-400 border-b border-slate-200 dark:border-slate-800 pb-4">
+              <i class="fa-solid fa-certificate text-2xl"></i>
+              <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Certificates & Diplomas</h3>
+            </div>
+
+            <div class="space-y-6">
+              
+              <div class="space-y-1">
+                <div class="flex justify-between items-start">
+                  <h4 class="text-lg font-bold text-slate-900 dark:text-white">OutlierEDU: Prompt Engineering</h4>
+                  <span class="text-xs font-mono px-2.5 py-0.5 bg-indigo-100 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 rounded-full">Issued 2026</span>
+                </div>
+                <p class="text-slate-600 dark:text-slate-400 text-sm">Outlier AI</p>
+                <p class="text-xs text-slate-500 dark:text-slate-400 pt-1">Advanced techniques in prompt design, RLHF alignment, and model debugging.</p>
+              </div>
+
+              <div class="space-y-1">
+                <div class="flex justify-between items-start">
+                  <h4 class="text-lg font-bold text-slate-900 dark:text-white">Diploma in Computer Applications</h4>
+                  <span class="text-xs font-mono px-2.5 py-0.5 bg-indigo-100 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 rounded-full">Issued 2025</span>
+                </div>
+                <p class="text-slate-600 dark:text-slate-400 text-sm">Web Net Infotech</p>
+                <p class="text-xs text-slate-500 dark:text-slate-400 pt-1">Comprehensive training in computer systems, office applications, and digital workflows.</p>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 relative">
+      <div class="max-w-5xl mx-auto space-y-12">
+        
+        <div class="text-center space-y-3 reveal">
+          <span class="text-sm font-mono text-blue-600 dark:text-blue-400 font-semibold tracking-wider uppercase">Connect</span>
+          <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white">Get In Touch</h2>
+          <p class="text-slate-600 dark:text-slate-400 max-w-xl mx-auto text-sm sm:text-base">Interested in collaborating on AI training, linguistic evaluation, or dataset annotation? Send a message!</p>
+        </div>
+
+        <div class="grid md:grid-cols-12 gap-8 items-start reveal">
+          
+          <!-- Contact Direct Info -->
+          <div class="md:col-span-5 glass-card rounded-2xl p-8 space-y-6">
+            <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Contact Information</h3>
+            
+            <div class="space-y-4">
+              <div class="flex items-center space-x-4 p-3 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                <div class="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center text-blue-600 dark:text-blue-400 text-xl">
+                  <i class="fa-solid fa-envelope"></i>
+                </div>
+                <div>
+                  <div class="text-xs text-slate-500 dark:text-slate-400">Email Address</div>
+                  <a href="mailto:arasaifi786@gmail.com" class="text-sm sm:text-base font-semibold text-slate-900 dark:text-white hover:text-blue-600 transition-colors break-all">arasaifi786@gmail.com</a>
+                </div>
+              </div>
+
+              <div class="flex items-center space-x-4 p-3 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                <div class="w-12 h-12 rounded-xl bg-indigo-100 dark:bg-indigo-900/50 flex items-center justify-center text-indigo-600 dark:text-indigo-400 text-xl">
+                  <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <div>
+                  <div class="text-xs text-slate-500 dark:text-slate-400">Location</div>
+                  <div class="text-sm sm:text-base font-semibold text-slate-900 dark:text-white">Delhi, India</div>
+                </div>
+              </div>
+
+              <div class="flex items-center space-x-4 p-3 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                <div class="w-12 h-12 rounded-xl bg-purple-100 dark:bg-purple-900/50 flex items-center justify-center text-purple-600 dark:text-purple-400 text-xl">
+                  <i class="fa-solid fa-clock"></i>
+                </div>
+                <div>
+                  <div class="text-xs text-slate-500 dark:text-slate-400">Availability</div>
+                  <div class="text-sm sm:text-base font-semibold text-slate-900 dark:text-white">Contract / Freelance AI Consulting</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Copy Button -->
+            <button onclick="copyToClipboard('arasaifi786@gmail.com', 'Email copied to clipboard!')" class="w-full py-3 rounded-xl bg-slate-900 dark:bg-slate-800 hover:bg-slate-800 dark:hover:bg-slate-700 text-white font-medium text-sm transition-all flex items-center justify-center space-x-2">
+              <i class="fa-regular fa-copy"></i>
+              <span>Copy Email Address</span>
+            </button>
+          </div>
+
+          <!-- Interactive Contact Form -->
+          <div class="md:col-span-7 glass-card rounded-2xl p-8 space-y-6">
+            <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Send a Message</h3>
+            
+            <form id="contact-form" class="space-y-4" onsubmit="handleFormSubmit(event)">
+              <div>
+                <label for="contact-name" class="block text-xs font-mono uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1">Your Name</label>
+                <input type="text" id="contact-name" required placeholder="John Doe" class="w-full px-4 py-3 rounded-xl bg-slate-100 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all text-sm">
+              </div>
+
+              <div>
+                <label for="contact-email" class="block text-xs font-mono uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1">Your Email</label>
+                <input type="email" id="contact-email" required placeholder="john@example.com" class="w-full px-4 py-3 rounded-xl bg-slate-100 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all text-sm">
+              </div>
+
+              <div>
+                <label for="contact-message" class="block text-xs font-mono uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1">Message</label>
+                <textarea id="contact-message" rows="4" required placeholder="Specify project requirements or collaboration details..." class="w-full px-4 py-3 rounded-xl bg-slate-100 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all text-sm"></textarea>
+              </div>
+
+              <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold text-sm shadow-lg shadow-blue-500/20 hover:scale-[1.01] transition-all flex items-center justify-center space-x-2">
+                <i class="fa-regular fa-paper-plane"></i>
+                <span>Send Message</span>
+              </button>
+            </form>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-slate-200 dark:border-slate-800 py-10 px-4 sm:px-6 lg:px-8 relative z-10 bg-slate-100/50 dark:bg-slate-950">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400 font-medium">
+      <div>
+        © 2026 SAISTA. All rights reserved.
+      </div>
+      <div class="flex space-x-6">
+        <span>Linguistic & Data Specialist</span>
+        <span>•</span>
+        <span>Delhi, India</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT IMPLEMENTATION -->
+  <script>
+    /* ==========================================================================
+       1. Theme Switcher Logic (Dark / Light Mode)
+       ========================================================================== */
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const darkIcon = document.getElementById('theme-toggle-dark-icon');
+    const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+    // Check saved theme or system preference
+    if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+      lightIcon.classList.remove('hidden');
+      darkIcon.classList.add('hidden');
+    } else {
+      document.documentElement.classList.remove('dark');
+      darkIcon.classList.remove('hidden');
+      lightIcon.classList.add('hidden');
+    }
+
+    themeToggleBtn.addEventListener('click', function() {
+      lightIcon.classList.toggle('hidden');
+      darkIcon.classList.toggle('hidden');
+
+      if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('color-theme', 'light');
+      } else {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('color-theme', 'dark');
+      }
+    });
+
+    /* ==========================================================================
+       2. Mobile Navigation Drawer Toggle
+       ========================================================================== */
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+
+    mobileBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+      });
+    });
+
+    /* ==========================================================================
+       3. Scroll Observer for Fade-in Animations
+       ========================================================================== */
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.15
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    /* ==========================================================================
+       4. Interactive Skill Filtering Logic
+       ========================================================================== */
+    function filterSkills(category) {
+      const cards = document.querySelectorAll('.skill-card');
+      const buttons = document.querySelectorAll('.skill-btn');
+
+      // Update button active state
+      buttons.forEach(btn => {
+        btn.classList.remove('bg-blue-600', 'text-white', 'shadow-md');
+        btn.classList.add('glass-card', 'text-slate-700', 'dark:text-slate-300');
+      });
+
+      event.currentTarget.classList.remove('glass-card', 'text-slate-700', 'dark:text-slate-300');
+      event.currentTarget.classList.add('bg-blue-600', 'text-white', 'shadow-md');
+
+      // Filter cards
+      cards.forEach(card => {
+        if (category === 'all' || card.getAttribute('data-category') === category) {
+          card.style.display = 'block';
+          setTimeout(() => card.style.opacity = '1', 50);
+        } else {
+          card.style.opacity = '0';
+          setTimeout(() => card.style.display = 'none', 300);
+        }
+      });
+    }
+
+    /* ==========================================================================
+       5. Clipboard Copy Helper with Toast Notification
+       ========================================================================== */
+    function copyToClipboard(text, message) {
+      // Fallback copy logic for iframe safety
+      const textArea = document.createElement("textarea");
+      textArea.value = text;
+      document.body.appendChild(textArea);
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        showToast(message || 'Copied to clipboard!');
+      } catch (err) {
+        console.error('Copy failed', err);
+      }
+      document.body.removeChild(textArea);
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toast-message');
+      toastMsg.textContent = message;
+      
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 3000);
+    }
+
+    /* ==========================================================================
+       6. Contact Form Submission Handler
+       ========================================================================== */
+    function handleFormSubmit(event) {
+      event.preventDefault();
+      const name = document.getElementById('contact-name').value;
+      const email = document.getElementById('contact-email').value;
+      const message = document.getElementById('contact-message').value;
+
+      // Launch default mail client with prefilled data
+      const mailtoUrl = `mailto:arasaifi786@gmail.com?subject=Portfolio Contact from ${encodeURIComponent(name)}&body=${encodeURIComponent("Name: " + name + "\nEmail: " + email + "\n\nMessage:\n" + message)}`;
+      
+      window.location.href = mailtoUrl;
+      showToast('Opening mail client...');
+      document.getElementById('contact-form').reset();
+    }
+
+    /* ==========================================================================
+       7. Interactive Background Particle Canvas
+       ========================================================================== */
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+
+    let particles = [];
+    const particleCount = 45;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Particle {
+      constructor() {
+        this.reset();
+      }
+
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.vx = (Math.random() - 0.5) * 0.4;
+        this.vy = (Math.random() - 0.5) * 0.4;
+        this.radius = Math.random() * 2 + 1;
+        this.alpha = Math.random() * 0.5 + 0.2;
+      }
+
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+      }
+
+      draw() {
+        const isDark = document.documentElement.classList.contains('dark');
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = isDark 
+          ? `rgba(96, 165, 250, ${this.alpha * 0.6})` 
+          : `rgba(37, 99, 235, ${this.alpha * 0.3})`;
+        ctx.fill();
+      }
+    }
+
+    for (let i = 0; i < particleCount; i++) {
+      particles.push(new Particle());
+    }
+
+    function animateCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const isDark = document.documentElement.classList.contains('dark');
+
+      // Draw particle connections
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < 130) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            const lineAlpha = (1 - dist / 130) * 0.15;
+            ctx.strokeStyle = isDark 
+              ? `rgba(139, 92, 246, ${lineAlpha})` 
+              : `rgba(59, 130, 246, ${lineAlpha})`;
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+          }
+        }
+      }
+
+      requestAnimationFrame(animateCanvas);
+    }
+
+    window.onload = function() {
+      animateCanvas();
+    };
+  </script>
+</body>
+</html>
